@@ -1,46 +1,37 @@
-# NOVA AI — Video Studio
+# NOVA AI — Cloud Video Studio
 
-A free, local-first AI video generation interface for **ComfyUI**. Supports text-to-video and image-to-video when you install a compatible workflow and model.
+NOVA AI is a browser-based text-to-video prototype hosted on GitHub Pages. It submits prompts directly to the public Lightricks LTX-Video Distilled Gradio Space on Hugging Face ZeroGPU.
 
-## Hosted preview
-
-GitHub Pages hosts the NOVA interface at:
+## Live website
 
 https://yorrichi68-ai.github.io/NOVAI/
 
-**Important:** GitHub Pages only hosts static files. It cannot run Python, ComfyUI, or the AI video model. To generate videos, run NOVA locally on the same computer as ComfyUI using the instructions below. The hosted page is a project landing/demo page, not a cloud GPU service.
+## Cloud generation
 
-## Run the generator locally
+1. Open the website.
+2. Enter a descriptive prompt.
+3. Choose a duration and output size.
+4. Click **Generate Video in Cloud**.
+5. Keep the tab open while the shared GPU queue runs.
 
-1. Install Python 3.
-2. Install and start [ComfyUI](https://www.comfy.org/download). Its local API should be available at http://127.0.0.1:8188.
-3. Download a compatible video workflow and model. Start with the [official ComfyUI Wan examples](https://comfyanonymous.github.io/ComfyUI_examples/wan/).
-4. Download this repository (Code → Download ZIP) and extract it.
-5. On Windows, double-click `start_nova_windows.bat`. Or run `python server.py` in this folder.
-6. Open http://127.0.0.1:8000 in Chrome.
-7. In ComfyUI, enable Dev Mode and save the workflow using **Save (API Format)**.
-8. Import the JSON workflow into NOVA and map the prompt node/input. For image-to-video, also map the image loader node.
+The browser calls the public Gradio queue API at `https://lightricks-ltx-video-distilled.hf.space`. No local ComfyUI, local model, local server, or API key is required for the anonymous demo.
 
-## Requirements
+## Important limits
 
-- Chrome or another modern browser
-- Python 3
-- ComfyUI
-- A compatible video diffusion model and workflow
-- A supported GPU is strongly recommended; generation may be impractically slow on CPU
+- This is a community-hosted shared demo, not NOVA-owned infrastructure.
+- Hugging Face ZeroGPU quotas apply. The documented anonymous quota is small (2 GPU minutes/day); authenticated free accounts may receive a larger personal quota. Provider limits and availability can change.
+- The Space may be busy, paused, changed, or unavailable. Generation is not guaranteed.
+- This is not unlimited Google Flow-level service and does not promise a free unlimited video API.
+- GitHub Pages hosts only the front end; video inference runs on the external Hugging Face Space.
+- Do not put private API keys or tokens in this public repository.
 
-## Files
+## Source and service
 
-- `index.html` — GitHub Pages landing page
-- `site/index.html` — copy of the hosted landing page
-- `server.py` — local-only bridge between the browser UI and ComfyUI
-- `start_nova_windows.bat` — Windows launcher
+- Front end: `index.html` and `site/index.html`
+- Deployment: `.github/workflows/pages.yml`
+- Hosted model Space: https://huggingface.co/spaces/Lightricks/ltx-video-distilled
+- Model project: https://github.com/Lightricks/LTX-Video
 
-The full interactive studio interface is included in the NOVA ZIP package previously provided in this chat. The current Pages site is a hosted project landing page; it is not itself the video-generation engine.
+## Troubleshooting
 
-## Notes
-
-- No paid API key is required.
-- This repository does not include model weights; they are large and have separate licenses.
-- Workflow node IDs vary. You must map the correct node IDs and input names for your imported API workflow.
-- The local bridge binds to 127.0.0.1 only. Do not expose it to the public internet.
+If generation fails, retry later; the shared Space may be sleeping, busy, or out of quota. If the provider changes its Gradio API, update the endpoint and parameter mapping in the page's script.
