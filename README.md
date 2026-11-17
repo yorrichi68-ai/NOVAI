@@ -31,10 +31,12 @@ https://yorrichi68-ai.github.io/NOVAI/
 
 ## Files
 
-- `index.html` — NOVA local studio interface
+- `index.html` — GitHub Pages landing page
+- `site/index.html` — copy of the hosted landing page
 - `server.py` — local-only bridge between the browser UI and ComfyUI
 - `start_nova_windows.bat` — Windows launcher
-- `site/index.html` — GitHub Pages project landing page
+
+The full interactive studio interface is included in the NOVA ZIP package previously provided in this chat. The current Pages site is a hosted project landing page; it is not itself the video-generation engine.
 
 ## Notes
 
